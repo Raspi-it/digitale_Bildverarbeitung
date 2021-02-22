@@ -2,10 +2,10 @@ import cv2
 import numpy as np
 import Utilities
 from scipy.spatial import KDTree
-#from webcolors import (
-#    css3_hex_to_names,
-#    hex_to_rgb,
-#)
+from webcolors import (
+    css3_hex_to_names,
+    hex_to_rgb,
+)
 
 # Example for basic pixel based image manipulation:
 # https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_core/py_basic_ops/py_basic_ops.html
@@ -17,8 +17,7 @@ from scipy.spatial import KDTree
 
 def myFirstImageManipulation(img):
     imgRotated = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
-    b, g, r = cv2.split(imgRotated)
-    imgRotated = cv2.merge([r, g, b])
+
     showImage(imgRotated)
 
 
@@ -103,18 +102,18 @@ def printImageDetails(img):
     print('##############################################')
 
 
-#def convert_rgb_to_names(rgb_tuple):
-#    # a dictionary of all the hex and their respective names in css3
-#    css3_db = css3_hex_to_names
-#    names = []
-#    rgb_values = []
-#    for color_hex, color_name in css3_db.items():
-#        names.append(color_name)
-#        rgb_values.append(hex_to_rgb(color_hex))
+def convert_rgb_to_names(rgb_tuple):
+    # a dictionary of all the hex and their respective names in css3
+    css3_db = css3_hex_to_names
+    names = []
+    rgb_values = []
+    for color_hex, color_name in css3_db.items():
+        names.append(color_name)
+        rgb_values.append(hex_to_rgb(color_hex))
 
-#    kdt_db = KDTree(rgb_values)
-#    distance, index = kdt_db.query(rgb_tuple)
-#    return f'bestmögliche Farbbeschreibung: {names[index]}'
+    kdt_db = KDTree(rgb_values)
+    distance, index = kdt_db.query(rgb_tuple)
+    return f'bestmögliche Farbbeschreibung: {names[index]}'
 
 
 def startUp(img):
