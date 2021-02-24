@@ -16,11 +16,23 @@ from scipy.spatial import KDTree
 
 
 def myFirstImageManipulation(img):
-    imgRotated = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
-    b, g, r = cv2.split(imgRotated)
-    imgRotated = cv2.merge([r, g, b])
-    saveImage(imgRotated)
-    showImage(imgRotated)
+    # Rotiert das Bild
+    imgEdited = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+
+    # Splittet die Channel in b, g, r
+    b, g, r = cv2.split(imgEdited)
+
+    # Fügt sie wieder in anderer Reihenfolge zusammen
+    imgEdited = cv2.merge([r, g, b])
+
+    # Bild speichern
+    saveImage(imgEdited)
+
+    # Bild Informationen ausgeben
+    printImageDetails(imgEdited)
+
+    # Bild anzeigen
+    showImage(imgEdited)
 
 
 def showImage(img):
@@ -29,8 +41,13 @@ def showImage(img):
 
 
 def changeGrayscale(img):
+    # Erstellt das Grayscale Bild
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    # Bild Informationen ausgeben
     printImageDetails(img)
+
+    # Bild anzeigen
     showImage(img)
 
 
@@ -48,14 +65,10 @@ def saveImage(img):
 
 
 def printImageDetails(img):
-    # Check ob das Bild einen Channel besitzt, ansonsten bekommt es einen zugewiesen
-
-    # Name des Bildes
-
-    # Width ?Zeile
+    # Width Zeile
     print('Höhe des Bildes: ', img.shape[0], ' Pixel.')
 
-    # Height ?Spalte
+    # Height Spalte
     print('Breite des Bildes: ', img.shape[1], ' Pixel.')
 
     # Number of Channels
@@ -117,7 +130,7 @@ def printImageDetails(img):
 #    distance, index = kdt_db.query(rgb_tuple)
 #    return f'bestmögliche Farbbeschreibung: {names[index]}'
 
-
+# Startet die Funktionen
 def startUp(img):
     showImage(img)
     printImageDetails(img)
