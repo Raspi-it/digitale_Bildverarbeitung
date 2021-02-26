@@ -75,7 +75,7 @@ def printImageDetails(img):
     if len(img.shape) > 2:
         print('Anzahl Channel: ', img.shape[2])
     else:
-        print('Grayscale Bilder bekommen keinen Channel zugewiesen und besitzen nur einen.')
+        print('Grayscale Bilder bekommen keinen Channel im Tupel zugewiesen und besitzen auch nur einen.')
 
     # Number of Pixels
     print('Gesamtanzahl von Pixeln: ', img.size)
