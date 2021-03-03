@@ -13,10 +13,12 @@ def showHistogram(img):
         plt.xlim([0, 256])
     plt.show()
 
+
 def plotHistogramVector(histogram):
     plt.plot(histogram, color='b')
     plt.xlim([0, len(histogram)])
     plt.show()
+
 
 def grabWebcam():
     cap = cv2.VideoCapture(0)

@@ -20,17 +20,19 @@ import Utilities
 # make sure to prevent pixel overflows or negative pixel values
 
 if __name__ == '__main__':
-    img = cv2.imread("../../SampleData/classics/lena.png",0)
-    stretchedImg = HM.stretchHistogram(img)
-    equalizedImg = HM.equalizeHistogram(img)
-    Utilities.showHistogram(img)
-    Utilities.showHistogram(stretchedImg)
-    Utilities.showHistogram(equalizedImg)
+    img = cv2.imread("./SampleData/classics/lena.png", 1)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
+    #stretchedImg = HM.stretchHistogram(img)
+    equalizedImg = HM.equalizeHistogram(img)
+
+    Utilities.showHistogram(img)
+    #Utilities.showHistogram(stretchedImg)
+    Utilities.showHistogram(equalizedImg)
 
     cv2.imshow("Image", img)
     cv2.waitKey()
-    cv2.imshow("Image", stretchedImg)
-    cv2.waitKey()
+    #cv2.imshow("Image", stretchedImg)
+    #cv2.waitKey()
     cv2.imshow("Image", equalizedImg)
     cv2.waitKey()

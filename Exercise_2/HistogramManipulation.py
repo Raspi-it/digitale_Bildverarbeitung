@@ -9,13 +9,20 @@ def applyLUT(img, LUT):
 
     return result
 
+
 # function to equalize a grayscale image
 def equalizeHistogram(img):
-    result = img.copy()
+    # result = img.copy()
+    hist, bins = np.histogram(img.flatten(), 256, [0, 256])
 
-
+    cdf = hist.cumsum()
+    cdf_m = np.ma.masked_equal(cdf, 0)
+    cdf_m = (cdf_m - cdf_m.min()) * 255 / (cdf_m.max() - cdf_m.min())
+    cdf = np.ma.filled(cdf_m, 0).astype('uint8')
+    result = cdf[img]
     print("Histogram equalized")
     return result
+
 
 # function to stretch a grayscale image
 def stretchHistogram(img):
@@ -31,6 +38,3 @@ def calculateHistogram(img, nrBins):
     histogram = np.zeros([nrBins], dtype=np.int)
 
     return histogram
-
-
-
