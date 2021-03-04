@@ -24,50 +24,59 @@ if __name__ == '__main__':
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     stretchedImg = HM.stretchHistogram(img)
-    #cv2.imwrite('./SampleData/Edited/stretchedImage.jpg', stretchedImg)
-    #print('Image was saved.')
+    cv2.imwrite('./SampleData/Edited/stretchedImage.jpg', stretchedImg)
+    print('Image was saved.')
 
-    #equalizedImg = HM.equalizeHistogram(img)
-    #cv2.imwrite('./SampleData/Edited/equalizedImage.jpg', equalizedImg)
-    #print('Image was saved.')
+    equalizedImg = HM.equalizeHistogram(img)
+    cv2.imwrite('./SampleData/Edited/equalizedImage.jpg', equalizedImg)
+    print('Image was saved.')
 
-    #Utilities.showHistogram(img)
-    #Utilities.saveHist(img, 'normaleHist')
+    expImg = HM.expoImg(img)
+    cv2.imwrite('./SampleData/Edited/exponentiellImage.jpg', expImg)
+
+    inverseImg = HM.invImg(img)
+    cv2.imwrite('./SampleData/Edited/inverseImage.jpg', inverseImg)
+
+    threshImg = HM.threshImg(img)
+    cv2.imwrite('./SampleData/Edited/thresholdImage.jpg', threshImg)
+
+    LogImg = HM.logImg(img)
+    cv2.imwrite('./SampleData/Edited/logarithmischImage.jpg', LogImg)
+
+
+    Utilities.showHistogram(img)
+    Utilities.saveHist(img, 'normaleHist')
 
     Utilities.showHistogram(stretchedImg)
-    #Utilities.saveHist(stretchedImg, 'stretchedHist')
+    Utilities.saveHist(stretchedImg, 'stretchedHist')
 
-    #Utilities.showHistogram(equalizedImg)
-    #Utilities.saveHist(equalizedImg, 'equalizeHist')
+    Utilities.showHistogram(equalizedImg)
+    Utilities.saveHist(equalizedImg, 'equalizeHist')
 
-    #cv2.imshow("Original Image", img)
-    #cv2.imshow("Stretched Image", stretchedImg)
-    #cv2.waitKey()
-    #cv2.imshow("Equalized Image", equalizedImg)
-    #cv2.waitKey()
+    Utilities.showHistogram(expImg)
+    Utilities.saveHist(equalizedImg, 'expHist')
 
-    # Test Bruder
-    #LogImg = HM.logImg(img)
+    Utilities.showHistogram(inverseImg)
+    Utilities.saveHist(equalizedImg, 'inverseHist')
 
-    #Utilities.showHistogram(LogImg)
+    Utilities.showHistogram(threshImg)
+    Utilities.saveHist(equalizedImg, 'thresholdHist')
 
-    #cv2.imshow("Log Image", LogImg)
-    #cv2.waitKey()
+    Utilities.showHistogram(LogImg)
+    Utilities.saveHist(equalizedImg, 'logarithmischHist')
+
+    cv2.imshow("Original Image", img)
+    cv2.imshow("Stretched Image", stretchedImg)
+    cv2.imshow("Equalized Image", equalizedImg)
+    cv2.imshow("Expo Image", expImg)
+    cv2.imshow("Inverse Image", inverseImg)
+    cv2.imshow("Threshold Image", threshImg)
+    cv2.imshow("Log Image", LogImg)
+    cv2.waitKey()
+
     
-    #expImg = HM.expoImg(img)
-    #Utilities.showHistogram(expImg)
-    #cv2.imshow("Expo Image", expImg)
-    #cv2.waitKey()
-    
-    #inverseImg = HM.invImg(img)
-    #Utilities.showHistogram(inverseImg)
-    #cv2.imshow("Inverse Image", inverseImg)
-    #cv2.waitKey()
+    fill = HM.fillgaps(stretchedImg)
+    Utilities.saveHist(fill, 'Stretched_image-FilledGaps')
 
-    #threshImg = HM.threshImg(img)
-    #Utilities.showHistogram(threshImg)
-    #cv2.imshow("Threshold Image", threshImg)
-    #cv2.waitKey()
-    
-    test = HM.fillgaps(stretchedImg)
-    #Utilities.showHistogram(img)
+    fill = HM.fillgaps(equalizedImg)
+    Utilities.saveHist(fill, 'Equalized_image-FilledGaps')

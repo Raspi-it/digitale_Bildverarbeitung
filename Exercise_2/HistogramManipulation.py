@@ -112,6 +112,7 @@ def fillgaps(img):
             hist[i] = (hist[i - 1] + hist[i + 1])/2
         i = i + 1
 
+    plt.close()
     plt.plot(hist, color='b')
     plt.xlim([0, 256])
     plt.show()
