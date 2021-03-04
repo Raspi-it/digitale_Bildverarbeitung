@@ -20,9 +20,11 @@ import Utilities
 # make sure to prevent pixel overflows or negative pixel values
 
 if __name__ == '__main__':
+    # Bild laden und in Grauwertbild laden
     img = cv2.imread("./SampleData/classics/lena.png", 1)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
+    # Bild in mehreren Versionen bearbeiten lassen, sowie abspeichern
     stretchedImg = HM.stretchHistogram(img)
     cv2.imwrite('./SampleData/Edited/stretchedImage.jpg', stretchedImg)
     print('Image was saved.')
@@ -33,17 +35,21 @@ if __name__ == '__main__':
 
     expImg = HM.expoImg(img)
     cv2.imwrite('./SampleData/Edited/exponentiellImage.jpg', expImg)
+    print('Image was saved.')
 
     inverseImg = HM.invImg(img)
     cv2.imwrite('./SampleData/Edited/inverseImage.jpg', inverseImg)
+    print('Image was saved.')
 
     threshImg = HM.threshImg(img)
     cv2.imwrite('./SampleData/Edited/thresholdImage.jpg', threshImg)
+    print('Image was saved.')
 
     LogImg = HM.logImg(img)
     cv2.imwrite('./SampleData/Edited/logarithmischImage.jpg', LogImg)
+    print('Image was saved.')
 
-
+    # Histogramme erstellen und anzeigen lassen
     Utilities.showHistogram(img)
     Utilities.saveHist(img, 'normaleHist')
 
@@ -54,17 +60,18 @@ if __name__ == '__main__':
     Utilities.saveHist(equalizedImg, 'equalizeHist')
 
     Utilities.showHistogram(expImg)
-    Utilities.saveHist(equalizedImg, 'expHist')
+    Utilities.saveHist(expImg, 'expHist')
 
     Utilities.showHistogram(inverseImg)
-    Utilities.saveHist(equalizedImg, 'inverseHist')
+    Utilities.saveHist(inverseImg, 'inverseHist')
 
     Utilities.showHistogram(threshImg)
-    Utilities.saveHist(equalizedImg, 'thresholdHist')
+    Utilities.saveHist(threshImg, 'thresholdHist')
 
     Utilities.showHistogram(LogImg)
-    Utilities.saveHist(equalizedImg, 'logarithmischHist')
+    Utilities.saveHist(LogImg, 'logarithmischHist')
 
+    # Bilder anzeigen lassen
     cv2.imshow("Original Image", img)
     cv2.imshow("Stretched Image", stretchedImg)
     cv2.imshow("Equalized Image", equalizedImg)
@@ -74,9 +81,13 @@ if __name__ == '__main__':
     cv2.imshow("Log Image", LogImg)
     cv2.waitKey()
 
-    
-    fill = HM.fillgaps(stretchedImg)
-    Utilities.saveHist(fill, 'Stretched_image-FilledGaps')
+    # Gaps in den Histogrammen ausfüllen und anzeigen lassen
+    fill = HM.fillgaps(stretchedImg, 'Stretched_image-FilledGaps')
 
-    fill = HM.fillgaps(equalizedImg)
-    Utilities.saveHist(fill, 'Equalized_image-FilledGaps')
+    fill = HM.fillgaps(equalizedImg, 'Equalized_image-FilledGaps')
+
+    fill = HM.fillgaps(inverseImg, 'inversed_image-FilledGaps')
+
+    fill = HM.fillgaps(expImg, 'exponentiell_image-FilledGaps')
+
+    fill = HM.fillgaps(LogImg, 'logarithmisch_image-FilledGaps')

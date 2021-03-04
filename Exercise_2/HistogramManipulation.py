@@ -98,7 +98,7 @@ def threshImg(img):
     print("Histogram threshold")
     return result
 
-def fillgaps(img):
+def fillgaps(img, name):
     result = img.copy()
 
     L = 256
@@ -115,6 +115,7 @@ def fillgaps(img):
     plt.close()
     plt.plot(hist, color='b')
     plt.xlim([0, 256])
+    plt.savefig('./SampleData/Edited/' + name + '.jpg')
     plt.show()
 
     return result
