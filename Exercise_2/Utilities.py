@@ -6,7 +6,7 @@ def showHistogram(img):
     color = ('b', 'g', 'r')
     if len(img.shape) == 2:
         color = ('b')
-
+    plt.close()
     for i, col in enumerate(color):
         histr = cv2.calcHist([img], [i], None, [256], [0, 256])
         plt.plot(histr, color=col)
@@ -30,3 +30,14 @@ def grabWebcam():
             break
         # if key == ord(' '):
         # cv2.imwrite('vid_result.jpg',im)
+
+def saveHist(img, name):
+    color = ('b', 'g', 'r')
+    if len(img.shape) == 2:
+        color = ('b')
+    plt.close()
+    for i, col in enumerate(color):
+        histr = cv2.calcHist([img], [i], None, [256], [0, 256])
+        plt.plot(histr, color=col)
+        plt.xlim([0, 256])
+    plt.savefig('./SampleData/Edited/'+name+'.jpg')
