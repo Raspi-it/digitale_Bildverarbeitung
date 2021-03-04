@@ -61,7 +61,7 @@ def logImg(img):
              result[i, j] = 46 * np.log(result[i, j] + 1)
 
 
-    print("Histogram logged :)")
+    print("Histogram logarithmisch")
     return result
 
 def expoImg(img):
@@ -71,7 +71,7 @@ def expoImg(img):
         for j in range(result.shape[0]):
             result[i, j] = 2 * np.exp((result[i, j]/46) - 1)
 
-    print("Histogram exposed :)")
+    print("Histogram exponentiell")
     return result
 
 
@@ -82,7 +82,7 @@ def invImg(img):
         for j in range(result.shape[0]):
             result[i, j] = 255 - result[i, j]
 
-    print("Histogram exposed :)")
+    print("Histogram inverse")
     return result
 
 
@@ -95,7 +95,7 @@ def threshImg(img):
                 result[i, j] = 255
             else: result[i, j] = 0
 
-    print("Histogram exposed :)")
+    print("Histogram threshold")
     return result
 
 def fillgaps(img):
