@@ -2,6 +2,8 @@ import cv2
 import HistogramManipulation as HM
 import Utilities
 
+# Fabian Mechelke, Mika Wiesemann, Elliott Engel, Maximilian Lindner
+
 # Press the green button in the gutter to run the script.
 # Task 1:
 # implement a function that stretches a grayscale image
