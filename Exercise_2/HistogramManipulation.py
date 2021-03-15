@@ -3,10 +3,14 @@ import numpy as np
 import Utilities
 from matplotlib import pyplot as plt
 
+
 # function to apply a look-up table onto an image
 def applyLUT(img, LUT):
     result = img.copy()
 
+    for i in range(result.shape[0]):
+        for j in range(result.shape[1]):
+            result[i, j] = LUT[result[i, j]]
 
     return result
 
@@ -17,17 +21,17 @@ def equalizeHistogram(img):
 
     L = 256
     N = result.size
+    LUT = np.arange(256)
 
     hist = cv2.calcHist([result], [0], None, [L], [0, L])
     integral = hist.cumsum()
     #print('integ: ', integral)
 
-    for i in range(result.shape[0]):
-        for j in range(result.shape[1]):
-            result[i, j] = ((L - 1) / N) * integral[result[i, j]]
+    for i in range(LUT.size):
+            LUT[i] = ((L - 1) / N) * integral[LUT[i]]
 
     print("Histogram equalized")
-    return result
+    return applyLUT(result, LUT)
 
 
 # function to stretch a grayscale image
@@ -37,13 +41,13 @@ def stretchHistogram(img):
     min = np.min(result)
     max = np.max(result)
     L = 256
+    LUT = np.arange(256)
 
-    for i in range(result.shape[0]):
-        for j in range(result.shape[1]):
-            result[i, j] = ((result[i, j] - min) / (max - min)) * (L - 1)
+    for i in range(LUT.size):
+            LUT[i] = ((LUT[i] - min) / (max - min)) * (L - 1)
 
     print("Histogram stretched")
-    return result
+    return applyLUT(result, LUT)
 
 
 # function to create a vector containing the histogram
@@ -53,50 +57,57 @@ def calculateHistogram(img, nrBins):
 
     return histogram
 
+
 def logImg(img):
     result = img.copy()
 
-    for i in range(result.shape[1]):
-         for j in range(result.shape[0]):
-             result[i, j] = 46 * np.log(result[i, j] + 1)
+    LUT = np.arange(256)
+
+    for i in range(LUT.size):
+             LUT[i] = (255 / np.log(255)) * np.log(LUT[i] + 1)
 
 
     print("Histogram logarithmisch")
-    return result
+    return applyLUT(result, LUT)
+
 
 def expoImg(img):
     result = img.copy()
 
-    for i in range(result.shape[1]):
-        for j in range(result.shape[0]):
-            result[i, j] = 2 * np.exp((result[i, j]/46) - 1)
+    LUT = np.arange(256)
+
+    for i in range(LUT.size):
+            LUT[i] = (255 / np.exp(255/255)) * np.exp(LUT[i]/255 - 1)
 
     print("Histogram exponentiell")
-    return result
+    return applyLUT(result, LUT)
 
 
 def invImg(img):
     result = img.copy()
 
-    for i in range(result.shape[1]):
-        for j in range(result.shape[0]):
-            result[i, j] = 255 - result[i, j]
+    LUT = np.arange(256)
+
+    for i in range(LUT.size):
+            LUT[i] = 255 - LUT[i]
 
     print("Histogram inverse")
-    return result
+    return applyLUT(result, LUT)
 
 
 def threshImg(img):
     result = img.copy()
 
-    for i in range(result.shape[1]):
-        for j in range(result.shape[0]):
-            if result[i, j] > 128:
-                result[i, j] = 255
-            else: result[i, j] = 0
+    LUT = np.arange(256)
+
+    for i in range(LUT.size):
+            if LUT[i] > 128:
+                LUT[i] = 255
+            else: LUT[i] = 0
 
     print("Histogram threshold")
-    return result
+    return applyLUT(result, LUT)
+
 
 def fillgaps(img, name):
     result = img.copy()
